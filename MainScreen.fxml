@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?important javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainScreenController">
    <children>
-      <Button layoutX="65.0" layoutY="103.0" mnemonicParsing="false" text="Start an Activity" />
+      <Button fx:id="startActivityButton" layoutX="65.0" layoutY="103.0" mnemonicParsing="false" text="Start an Activity" />
       <Label layoutX="184.0" layoutY="14.0" text="Effort Logger Console">
          <font>
             <Font size="24.0" />
@@ -21,11 +21,15 @@
       <Label layoutX="21.0" layoutY="75.0" text="1. When you start a new activity, press the &quot;Start an Activity&quot; button." />
       <Label layoutX="66.0" layoutY="200.0" text="Effort Category" />
       <Label layoutX="21.0" layoutY="253.0" text="3. Press the &quot;Stop this Activity&quot; to generate an effort log entry using the attributes above." />
-      <Button layoutX="62.0" layoutY="281.0" mnemonicParsing="false" text="Stop this Activity" />
+      <Button fx:id="stopActivityButton" layoutX="62.0" layoutY="281.0" mnemonicParsing="false" text="Stop this Activity" />
       <Label layoutX="21.0" layoutY="322.0" text="4. Unless you are done for the day, it is best to perform steps 1 and 2 above before resuming work." />
-      <Button layoutX="64.0" layoutY="351.0" mnemonicParsing="false" text="Effort Log Editor" />
-      <Button layoutX="180.0" layoutY="351.0" mnemonicParsing="false" text="Defect Log Console" />
-      <Button layoutX="309.0" layoutY="351.0" mnemonicParsing="false" text="Definitions" />
-      <Button layoutX="393.0" layoutY="351.0" mnemonicParsing="false" text="Effort and Defect Logs" />
+      <Button fx:id="ELEditorButton" layoutX="64.0" layoutY="351.0" mnemonicParsing="false" text="Effort Log Editor" />
+      <Button fx:id="DLConsoleButton" layoutX="180.0" layoutY="351.0" mnemonicParsing="false" text="Defect Log Console" />
+      <Button fx:id="defButton" layoutX="309.0" layoutY="351.0" mnemonicParsing="false" text="Definitions" />
+      <Button fx:id="EffDefectLogButton" layoutX="393.0" layoutY="351.0" mnemonicParsing="false" text="Effort and Defect Logs" />
+      <ChoiceBox fx:id="projectChoiceBox" layoutX="115.0" layoutY="158.0" prefHeight="25.0" prefWidth="197.0" />
+      <ChoiceBox fx:id="lifeCycleBox" layoutX="416.0" layoutY="158.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="effortBox1" layoutX="115.0" layoutY="217.0" prefHeight="25.0" prefWidth="238.0" />
+      <ChoiceBox fx:id="effortBox2" layoutX="385.0" layoutY="217.0" prefHeight="25.0" prefWidth="177.0" />
    </children>
 </AnchorPane>
