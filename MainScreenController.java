@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javafx.collections.FXCollections;
-import javafx.fxml.FXML;
+import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.*;
 //import javafx.collections.FXCollections;
@@ -27,22 +27,32 @@ public class MainScreenController {
     private ChoiceBox<String> effortBox2;
     @FXML
     private Button managerDashboard;
+    
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     @FXML
     public void initialize() {
     	System.out.println("Initializing...");
-    	 projectChoiceBox.setItems(FXCollections.observableArrayList("Business Project", "Development Project"));
-    	 lifeCycleBox.setItems(FXCollections.observableArrayList("Planning", "Information Gathering", "Information Understanding", 
-    			 "Verifying", "Outlining", "Drafting", "Finalizing", "Team Meeting", "Coach Meeting", "Stakeholder Meeting"));
-    	 effortBox1.setItems(FXCollections.observableArrayList("Plans", "Deliverables", "Interruptions", "Defects", "Others"));
-    	 effortBox2.setItems(FXCollections.observableArrayList("Project Plan", "Risk Management Plan", "Conceptual Desing Plan", 
-    			 "Detailed Design Plan", "Implementation Plan"));
+    	projectChoiceBox.setItems(FXCollections.observableArrayList("Business Project", "Development Project"));
+   	 	lifeCycleBox.setItems(FXCollections.observableArrayList("Planning", "Information Gathering", "Information Understanding", 
+   			"Verifying", "Outlining", "Drafting", "Finalizing", "Team Meeting", "Coach Meeting", "Stakeholder Meeting"));
+   	 	effortBox1.setItems(FXCollections.observableArrayList("Plans", "Deliverables", "Interruptions", "Defects", "Others"));
+   	 	effortBox2.setItems(FXCollections.observableArrayList("Project Plan", "Risk Management Plan", "Conceptual Desing Plan", 
+   			 "Detailed Design Plan", "Implementation Plan"));
+    }
+    public void switchToManagerDashboard(ActionEvent event) throws IOException {
+    	Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+		stage =(Stage)((Node)event.getSource()).getScene().getWindow();
+		stage.setScene(scene);
+		stage.show();
     }
     
     private final String PASSWORD = "1234";
     @SuppressWarnings("unused")
     @FXML
-	private void onManagerDashboardClicked() {
+	private void onManagerDashboardClicked(ActionEvent event) throws IOException {
     	
     	TextInputDialog passwordDialog = new TextInputDialog();
         passwordDialog.setTitle("A Manager Authentication Key");
@@ -52,16 +62,22 @@ public class MainScreenController {
         String enteredPassword = passwordDialog.showAndWait().orElse("");
         if (enteredPassword.equals(PASSWORD)) {
             System.out.println("correct password");
-            try {
-                Parent managerDashboardRoot = FXMLLoader.load(getClass().getResource("ManagerScreen.fxml"));
-                Scene managerDashboardScene = new Scene(managerDashboardRoot);
-                
-                // Getting the current stage
-                Stage currentStage = (Stage) managerDashboard.getScene().getWindow();
-                currentStage.setScene(managerDashboardScene);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            
+            Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+    		stage =(Stage)((Node)event.getSource()).getScene().getWindow();
+    		stage.setScene(scene);
+    		stage.show();
+            
+//            try {
+//                Parent managerDashboardRoot = FXMLLoader.load(getClass().getResource("ManagerScreen.fxml"));
+//                Scene managerDashboardScene = new Scene(managerDashboardRoot);
+//                
+//                // Getting the current stage
+//                Stage currentStage = (Stage) managerDashboard.getScene().getWindow();
+//                currentStage.setScene(managerDashboardScene);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }else {
         	System.out.println("incorrect password");
     	Alert alert = new Alert(AlertType.ERROR);
@@ -71,4 +87,6 @@ public class MainScreenController {
         alert.showAndWait();
     }
 }
+    
+
 }
