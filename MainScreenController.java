@@ -31,10 +31,12 @@ public class MainScreenController {
     @FXML
     public void initialize() {
     	System.out.println("Initializing...");
-    	 projectChoiceBox.setItems(FXCollections.observableArrayList("Option A", "Option B", "Option C"));
-    	 lifeCycleBox.setItems(FXCollections.observableArrayList("Option A", "Option B", "Option C"));
-    	 effortBox1.setItems(FXCollections.observableArrayList("Option A", "Option B", "Option C"));
-    	 effortBox2.setItems(FXCollections.observableArrayList("Option A", "Option B", "Option C"));
+    	 projectChoiceBox.setItems(FXCollections.observableArrayList("Business Project", "Development Project"));
+    	 lifeCycleBox.setItems(FXCollections.observableArrayList("Planning", "Information Gathering", "Information Understanding", 
+    			 "Verifying", "Outlining", "Drafting", "Finalizing", "Team Meeting", "Coach Meeting", "Stakeholder Meeting"));
+    	 effortBox1.setItems(FXCollections.observableArrayList("Plans", "Deliverables", "Interruptions", "Defects", "Others"));
+    	 effortBox2.setItems(FXCollections.observableArrayList("Project Plan", "Risk Management Plan", "Conceptual Desing Plan", 
+    			 "Detailed Design Plan", "Implementation Plan"));
     }
     
     private final String PASSWORD = "1234";
@@ -69,6 +71,4 @@ public class MainScreenController {
         alert.showAndWait();
     }
 }
-    
-
 }
