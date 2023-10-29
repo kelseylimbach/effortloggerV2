@@ -19,7 +19,7 @@ import javafx.scene.control.*;
 
 
 public class DisplayViewController {
-	
+
 	@FXML
 	private ChoiceBox<String> projectChoiceBox;
 	@FXML
@@ -28,7 +28,7 @@ public class DisplayViewController {
 	private ChoiceBox<String> effortBox1;
 	@FXML
 	private ChoiceBox<String> effortBox2;
-	
+
 	@FXML
 	private Label loginSuccessLabel; // New label for login success
 //	private Stage stage;
@@ -45,22 +45,4 @@ public class DisplayViewController {
 		 	effortBox2.setItems(FXCollections.observableArrayList("Project Plan", "Risk Management Plan", "Conceptual Desing Plan",
 				 "Detailed Design Plan", "Implementation Plan"));
 	}
-
-
-
-//    @FXML
-//    private Label username;
-//    @FXML
-//    private Label password;
-//    @FXML
-//    private Label passwordLength; // Password length label
-//    
-//    @FXML
-//    private Label loginSuccessLabel; // New label for login success
-//
-//    public void setLogin(Login login) {
-//        username.setText("Name: " + login.getName());
-//        password.setText("Password: " + login.getPassword());
-//        passwordLength.setText("Length: " + login.getPasswordLength());
-//    }
 }

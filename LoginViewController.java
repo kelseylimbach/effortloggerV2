@@ -21,13 +21,13 @@ public class LoginViewController {
     private TextField usernameField;
     @FXML
     private PasswordField passwordField;
-    
+
     @FXML
     private Label errorMessage;
 
     @FXML
     private Label welcomeMessage; 
-    
+
     public void submitLogin(ActionEvent event) throws IOException {
         if (isNewUser) {
             String username = usernameField.getText();
@@ -50,15 +50,15 @@ public class LoginViewController {
                 return;
             }
         }
-        
+
         errorMessage.setText("testing");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DisplayPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/DisplayPage.fxml"));
         errorMessage.setText("testing after");
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         errorMessage.setText("new window");
         scene = new Scene(fxmlLoader.load(),900,600);
-        
+
         errorMessage.setText("blah");
         stage.setTitle("Welcome to EffortLogger V2");
 
@@ -76,7 +76,7 @@ public class LoginViewController {
         }
         return false;
     }
-    
+
     private boolean validateUser(String username, String password) {
         return "demoUser".equals(username) && "Password123".equals(password);
     }

@@ -16,8 +16,8 @@
 	</children> -->
 	
 	<children>
-<!-- 	<Button fx:id="startActivityButton" layoutX="65.0" layoutY="103.0" mnemonicParsing="false" text="Start an Activity" />
- -->	<Label layoutX="184.0" layoutY="14.0" text="Effort Logger Console">
+	<Button fx:id="startActivityButton" layoutX="65.0" layoutY="103.0" mnemonicParsing="false" text="Start an Activity" />
+	<Label layoutX="184.0" layoutY="14.0" text="Effort Logger Console">
 	<font>
 	<Font size="24.0" />
 	</font>
@@ -28,12 +28,12 @@
 	<Label layoutX="21.0" layoutY="75.0" text="1. When you start a new activity, press the &quot;Start an Activity&quot; button." />
 	<Label layoutX="66.0" layoutY="200.0" text="Effort Category" />
 	<Label layoutX="21.0" layoutY="253.0" text="3. Press the &quot;Stop this Activity&quot; to generate an effort log entry using the attributes above." />
-<!-- 	<Button fx:id="stopActivityButton" layoutX="62.0" layoutY="281.0" mnemonicParsing="false" text="Stop this Activity" />
- -->	<Label layoutX="21.0" layoutY="322.0" text="4. Unless you are done for the day, it is best to perform steps 1 and 2 above before resuming work." />
-	<!-- <Button fx:id="ELEditorButton" layoutX="15.0" layoutY="351.0" mnemonicParsing="false" text="Effort Log Editor" />
+	<Button fx:id="stopActivityButton" layoutX="62.0" layoutY="281.0" mnemonicParsing="false" text="Stop this Activity" />
+ 	<Label layoutX="21.0" layoutY="322.0" text="4. Unless you are done for the day, it is best to perform steps 1 and 2 above before resuming work." />
+	<Button fx:id="ELEditorButton" layoutX="15.0" layoutY="351.0" mnemonicParsing="false" text="Effort Log Editor" />
 	<Button fx:id="DLConsoleButton" layoutX="124.0" layoutY="351.0" mnemonicParsing="false" text="Defect Log Console" />
 	<Button fx:id="defButton" layoutX="256.0" layoutY="351.0" mnemonicParsing="false" text="Definitions" />
-	<Button fx:id="EffDefectLogButton" layoutX="348.0" layoutY="351.0" mnemonicParsing="false" text="Effort and Defect Logs" /> -->
+	<Button fx:id="EffDefectLogButton" layoutX="348.0" layoutY="351.0" mnemonicParsing="false" text="Effort and Defect Logs" /> 
 	<ChoiceBox fx:id="projectChoiceBox" layoutX="115.0" layoutY="158.0" prefHeight="25.0" prefWidth="197.0" />
 	<ChoiceBox fx:id="lifeCycleBox" layoutX="416.0" layoutY="158.0" prefWidth="150.0" />
 	<ChoiceBox fx:id="effortBox1" layoutX="115.0" layoutY="217.0" prefHeight="25.0" prefWidth="238.0" />
