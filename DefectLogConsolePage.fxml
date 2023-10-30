@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DefectLogConsolePageController">
    <children>
       <Button fx:id="DefectBackToHome" layoutX="254.0" layoutY="352.0" mnemonicParsing="false" text="Back to Home" />
       <Label fx:id="DefectConsoleTitle" layoutX="216.0" layoutY="21.0" text="Defect Log Console">
