@@ -2,25 +2,16 @@ package application;
 
 import java.io.IOException;
 
-//import javafx.fxml. *;
-//import javafx.scene.control.*;
 
-//import java.io.BufferedWriter;
-//import java.io.FileWriter;
-//import java.io.IOException;
-//import java.time.LocalDateTime;
-//import java.time.format.DateTimeFormatter;
 import javafx.collections.*;
-//import javafx.event.*;
+
 import javafx.fxml.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-//import javafx.scene.*;
-//import javafx.collections.FXCollections;
+
 import javafx.scene.control.*;
 import javafx.scene.text.Font;
-//import javafx.scene.control.Alert.AlertType;
-//import javafx.stage.*;
+
 import javafx.stage.Stage;
 
 
@@ -39,9 +30,7 @@ public class DisplayViewController {
 
 	@FXML
 	private Label loginSuccessLabel; // New label for login success
-//	private Stage stage;
-//	private Scene scene;
-//	private Parent root;
+
 	
 	 @FXML
 	    private void onStartActivityButtonClick() {
@@ -74,9 +63,9 @@ public class DisplayViewController {
 	        stage.show();
 	    }
 	 @FXML
-	    private void onEffortDefectLogButtonClick() throws IOException {
-	        // Load the FXML file for the Effort Log Editor Page
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EffortLogEditorPage.fxml"));
+	    private void onTutorialButtonClick() throws IOException {
+	        // Load the FXML file 
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Tutorial.fxml"));
 	        Parent root = loader.load();
 	        
 	        // Get the current stage (window)
@@ -90,8 +79,26 @@ public class DisplayViewController {
 	        stage.show();
 	    }
 	 @FXML
+	    private void onEffortDefectLogButtonClick() throws IOException {
+	        // Load the FXML file 
+		 System.out.println("Loading Effort & defect log console...");
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EffortDefectLogs.fxml"));
+	        Parent root = loader.load();
+	        
+	        // Get the current stage (window)
+	        Stage stage = (Stage) projectChoiceBox.getScene().getWindow();
+	        
+	        // Create a new scene with the loaded FXML root
+	        Scene scene = new Scene(root);
+	        
+	        // Set the new scene to the current stage
+	        stage.setScene(scene);
+	        stage.show();
+	        System.out.println("Finished loading Effort & defect log console...");
+	    }
+	 @FXML
 	    private void onDefinitionButtonClick() throws IOException {
-	        // Load the FXML file for the Effort Log Editor Page
+	        // Load the FXML file
 	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/DefinitionsPage.fxml"));
 	        Parent root = loader.load();
 	        
@@ -107,7 +114,8 @@ public class DisplayViewController {
 	    }
 	 @FXML
 	    private void onDefectLogConsoleButtonClick() throws IOException {
-	        // Load the FXML file for the Effort Log Editor Page
+	        // Load the FXML file
+		 System.out.println("Loading defect log console...");
 	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/DefectLogConsolePage.fxml"));
 	        Parent root = loader.load();
 	        
@@ -120,6 +128,7 @@ public class DisplayViewController {
 	        // Set the new scene to the current stage
 	        stage.setScene(scene);
 	        stage.show();
+	        System.out.println("Finished loading defect log console...");
 	    }
 	@FXML
 	public void initialize() {

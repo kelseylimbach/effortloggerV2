@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="application.DisplayViewController">
+<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DisplayViewController">
 	<!-- TODO Add Nodes -->
 	
 	<!-- <children>
@@ -33,17 +33,18 @@
 	<Label layoutX="16.0" layoutY="80.0" text="1. When you start a new activity, press the &quot;Start an Activity&quot; button." />
 	<Label layoutX="66.0" layoutY="200.0" text="Effort Category" />
 	<Label layoutX="21.0" layoutY="253.0" text="3. Press the &quot;Stop this Activity&quot; to generate an effort log entry using the attributes above." />
-	<Button fx:id="stopActivityButton" layoutX="62.0" layoutY="281.0" mnemonicParsing="false" text="Stop this Activity" onAction="#onStopActivityButtonClick" />
+	<Button fx:id="stopActivityButton" layoutX="62.0" layoutY="281.0" mnemonicParsing="false" onAction="#onStopActivityButtonClick" text="Stop this Activity" />
  	<Label layoutX="21.0" layoutY="322.0" text="4. Unless you are done for the day, it is best to perform steps 1 and 2 above before resuming work." />
 	<Button fx:id="ELEditorButton" layoutX="15.0" layoutY="351.0" mnemonicParsing="false" onAction="#onELEditorButtonClick" text="Effort Log Editor" />
 
-	<Button fx:id="DLConsoleButton" layoutX="124.0" layoutY="351.0" mnemonicParsing="false" onAction="#onEffortDefectLogButtonClick" text="Defect Log Console" />
+	<Button fx:id="DLConsoleButton" layoutX="124.0" layoutY="351.0" mnemonicParsing="false" onAction="#onDefectLogConsoleButtonClick" text="Defect Log Console" />
 	<Button fx:id="defButton" layoutX="256.0" layoutY="351.0" mnemonicParsing="false" onAction="#onDefinitionButtonClick" text="Definitions" />
 	<Button fx:id="EffDefectLogButton" layoutX="348.0" layoutY="351.0" mnemonicParsing="false" onAction="#onEffortDefectLogButtonClick" text="Effort and Defect Logs" /> 
 	<ChoiceBox fx:id="projectChoiceBox" layoutX="115.0" layoutY="170.0" prefHeight="25.0" prefWidth="197.0" />
 	<ChoiceBox fx:id="lifeCycleBox" layoutX="407.0" layoutY="170.0" prefWidth="150.0" />
 	<ChoiceBox fx:id="effortBox1" layoutX="115.0" layoutY="217.0" prefHeight="25.0" prefWidth="238.0" />
 	<ChoiceBox fx:id="effortBox2" layoutX="385.0" layoutY="217.0" prefHeight="25.0" prefWidth="177.0" />
+      <Button fx:id="tutorialButton" layoutX="496.0" layoutY="350.0" mnemonicParsing="false" onAction="#onTutorialButtonClick" text="Tutorial" />
 <!-- 	<Button fx:id="managerDashboard" onAction="#onManagerDashboardClicked" layoutX="501.0" layoutY="351.0" mnemonicParsing="false" text="Manager" />
  -->	
 	</children>

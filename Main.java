@@ -25,18 +25,3 @@ public class Main extends Application {
 		launch(args);
 	}
 }
-/*public class Main extends Application {
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("PopUpPage.fxml"));
-        Parent root = loader.load();
-        PopUpViewController controller = loader.getController();
-        Stage popupStage = new Stage();
-        popupStage.setScene(new Scene(root));
-        controller.setPopup(popupStage, primaryStage);
-        popupStage.show();
-    }
-    public static void main(String[] args) {
-        launch(args);
-    }
-}*/
