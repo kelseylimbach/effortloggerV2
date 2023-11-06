@@ -1,5 +1,5 @@
 package application;
-
+//Written by Saachi Mota
 public class Login {
 	private String name;
 	private String password;
