@@ -17,24 +17,6 @@ import java.nio.file.Paths;
 
 public class EffortLogEditorPageController {
 
-	@FXML
-	private TextArea logTextArea; // This is to bind to the TextArea in FXML.
-	
-	@FXML
-    public void initialize() {
-        loadLogData();
-    }
-	
-	private void loadLogData() {
-        // Logic to read from data.txt and set the text in the logTextArea
-        try {
-            String content = new String(Files.readAllBytes(Paths.get("data.txt")));
-            logTextArea.setText(content);
-        } catch (IOException e) {
-            e.printStackTrace();
-            logTextArea.setText("Failed to load log data.");
-        }
-    }
 	
     @FXML
     private void onBackToHomeButtonClick(ActionEvent event) throws IOException {
