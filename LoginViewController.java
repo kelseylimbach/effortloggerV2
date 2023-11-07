@@ -55,6 +55,7 @@ public class LoginViewController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/DisplayPage.fxml"));
         errorMessage.setText("testing after");
 
+
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         errorMessage.setText("new window");
         scene = new Scene(fxmlLoader.load(),900,600);
@@ -62,8 +63,11 @@ public class LoginViewController {
         errorMessage.setText("blah");
         stage.setTitle("Welcome to EffortLogger V2");
 
-        //DisplayViewController control = fxmlLoader.getController();
-        //control.setLogin(login);
+      DisplayViewController displayController = fxmlLoader.getController();
+      displayController.setLogin(login);
+      
+      errorMessage.setText("testing after setting login");
+
         stage.setScene(scene);
         stage.show();
     }

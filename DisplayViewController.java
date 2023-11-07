@@ -1,7 +1,13 @@
 package application;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 //Written by Sabrina Nelson
 import java.io.IOException;
-
+import java.io.PrintWriter;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 import javafx.collections.*;
 
@@ -30,10 +36,17 @@ public class DisplayViewController {
 
 	@FXML
 	private Label loginSuccessLabel; // New label for login success
+	
+	 private LocalDateTime startTime;
+	 private LocalDateTime endTime;
+	 private Login login;
+	 private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a M/d/yyyy");
+
 
 	
 	 @FXML
 	    private void onStartActivityButtonClick() {
+		 	startTime = LocalDateTime.now(); // Capture the start time
 	        clockStatusLabel.setText("Clock is Running");
 	        clockStatusLabel.setStyle("-fx-text-fill: white; -fx-background-color: green; -fx-padding: 10;");
 	        clockStatusLabel.setFont(new Font(14));
@@ -41,9 +54,36 @@ public class DisplayViewController {
 
 	    @FXML
 	    private void onStopActivityButtonClick() {
-	        clockStatusLabel.setText("Clock is stopped");
-	        clockStatusLabel.setStyle("-fx-text-fill: white; -fx-background-color: red; -fx-padding: 10;");
-	        clockStatusLabel.setFont(new Font(14));
+	    	 endTime = LocalDateTime.now();
+	         clockStatusLabel.setText("Clock is stopped");
+	         clockStatusLabel.setStyle("-fx-text-fill: white; -fx-background-color: red; -fx-padding: 10;");
+	         writeActivityLog();
+	    }
+	    
+	    private void writeActivityLog() {
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm:ss a M/d/yyyy");
+	        String startFormatted = startTime.format(formatter);
+	        String endFormatted = endTime.format(formatter);
+	        Duration duration = Duration.between(startTime, endTime);
+
+	        long seconds = duration.getSeconds();
+	        long absSeconds = Math.abs(seconds);
+	        String elapsedTime = String.format(
+	            "%d days, %d hours, %d minutes, %d seconds",
+	            absSeconds / 86400,
+	            (absSeconds % 86400) / 3600,
+	            ((absSeconds % 86400) % 3600) / 60,
+	            (absSeconds % 60));
+	        try (PrintWriter out = new PrintWriter(new FileWriter("data.txt", true))) {
+	            out.println("***");
+	            out.println("User: " + login.getName());
+	            out.println("Activity Started: " + startFormatted);
+	            out.println("Activity Ended: " + endFormatted);
+	            out.println("Total time elapsed: " + elapsedTime);
+	            out.println("***");
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
 	    }
 
 	 @FXML
@@ -139,5 +179,10 @@ public class DisplayViewController {
 		 	effortBox1.setItems(FXCollections.observableArrayList("Plans", "Deliverables", "Interruptions", "Defects", "Others"));
 		 	effortBox2.setItems(FXCollections.observableArrayList("Project Plan", "Risk Management Plan", "Conceptual Desing Plan",
 				 "Detailed Design Plan", "Implementation Plan"));
+	}
+
+	public void setLogin(Login login) {
+		this.login = login;
+		
 	}
 }

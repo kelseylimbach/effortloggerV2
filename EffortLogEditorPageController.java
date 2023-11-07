@@ -1,16 +1,40 @@
 package application;
 //Written by Sabrina Nelson
 import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+
 
 public class EffortLogEditorPageController {
 
+	@FXML
+	private TextArea logTextArea; // This is to bind to the TextArea in FXML.
+	
+	@FXML
+    public void initialize() {
+        loadLogData();
+    }
+	
+	private void loadLogData() {
+        // Logic to read from data.txt and set the text in the logTextArea
+        try {
+            String content = new String(Files.readAllBytes(Paths.get("data.txt")));
+            logTextArea.setText(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+            logTextArea.setText("Failed to load log data.");
+        }
+    }
 	
     @FXML
     private void onBackToHomeButtonClick(ActionEvent event) throws IOException {
