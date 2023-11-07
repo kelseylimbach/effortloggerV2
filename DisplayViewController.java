@@ -1,8 +1,9 @@
 package application;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-//Written by Sabrina Nelson
+
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -14,15 +15,10 @@ import javafx.collections.*;
 import javafx.fxml.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
 import javafx.scene.control.*;
 import javafx.scene.text.Font;
-
 import javafx.stage.Stage;
-
-
 public class DisplayViewController {
-
 	@FXML
 	private ChoiceBox<String> projectChoiceBox;
 	@FXML
@@ -36,14 +32,15 @@ public class DisplayViewController {
 
 	@FXML
 	private Label loginSuccessLabel; // New label for login success
-	
+
 	 private LocalDateTime startTime;
 	 private LocalDateTime endTime;
 	 private Login login;
+	 private String selectedProject, selectedLifeCycle, selectedEffortBox1, selectedEffortBox2;
 	 private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a M/d/yyyy");
 
 
-	
+
 	 @FXML
 	    private void onStartActivityButtonClick() {
 		 	startTime = LocalDateTime.now(); // Capture the start time
@@ -54,12 +51,15 @@ public class DisplayViewController {
 
 	    @FXML
 	    private void onStopActivityButtonClick() {
+	        clockStatusLabel.setText("Clock is stopped");
+	        clockStatusLabel.setStyle("-fx-text-fill: white; -fx-background-color: red; -fx-padding: 10;");
+	        clockStatusLabel.setFont(new Font(14));
 	    	 endTime = LocalDateTime.now();
 	         clockStatusLabel.setText("Clock is stopped");
 	         clockStatusLabel.setStyle("-fx-text-fill: white; -fx-background-color: red; -fx-padding: 10;");
 	         writeActivityLog();
 	    }
-	    
+
 	    private void writeActivityLog() {
 	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm:ss a M/d/yyyy");
 	        String startFormatted = startTime.format(formatter);
@@ -80,6 +80,10 @@ public class DisplayViewController {
 	            out.println("Activity Started: " + startFormatted);
 	            out.println("Activity Ended: " + endFormatted);
 	            out.println("Total time elapsed: " + elapsedTime);
+	            out.println("Project: " + selectedProject);
+	            out.println("Life Cycle: " + selectedLifeCycle);
+	            out.println("Effort Category: " + selectedEffortBox1);
+	            out.println("Effort Category 2: " + selectedEffortBox2);
 	            out.println("***");
 	        } catch (IOException e) {
 	            e.printStackTrace();
@@ -89,7 +93,7 @@ public class DisplayViewController {
 	 @FXML
 	    private void onELEditorButtonClick() throws IOException {
 	        // Load the FXML file for the Effort Log Editor Page
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EffortLogEditorPage.fxml"));
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("EffortLogEditorPage.fxml"));
 	        Parent root = loader.load();
 	        
 	        // Get the current stage (window)
@@ -105,7 +109,7 @@ public class DisplayViewController {
 	 @FXML
 	    private void onTutorialButtonClick() throws IOException {
 	        // Load the FXML file 
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Tutorial.fxml"));
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("Tutorial.fxml"));
 	        Parent root = loader.load();
 	        
 	        // Get the current stage (window)
@@ -122,7 +126,7 @@ public class DisplayViewController {
 	    private void onEffortDefectLogButtonClick() throws IOException {
 	        // Load the FXML file 
 		 System.out.println("Loading Effort & defect log console...");
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EffortDefectLogs.fxml"));
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("EffortDefectLogs.fxml"));
 	        Parent root = loader.load();
 	        
 	        // Get the current stage (window)
@@ -139,7 +143,7 @@ public class DisplayViewController {
 	 @FXML
 	    private void onDefinitionButtonClick() throws IOException {
 	        // Load the FXML file
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/DefinitionsPage.fxml"));
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("DefinitionsPage.fxml"));
 	        Parent root = loader.load();
 	        
 	        // Get the current stage (window)
@@ -156,7 +160,7 @@ public class DisplayViewController {
 	    private void onDefectLogConsoleButtonClick() throws IOException {
 	        // Load the FXML file
 		 System.out.println("Loading defect log console...");
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/DefectLogConsolePage.fxml"));
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("DefectLogConsolePage.fxml"));
 	        Parent root = loader.load();
 	        
 	        // Get the current stage (window)
@@ -179,10 +183,27 @@ public class DisplayViewController {
 		 	effortBox1.setItems(FXCollections.observableArrayList("Plans", "Deliverables", "Interruptions", "Defects", "Others"));
 		 	effortBox2.setItems(FXCollections.observableArrayList("Project Plan", "Risk Management Plan", "Conceptual Desing Plan",
 				 "Detailed Design Plan", "Implementation Plan"));
+		 	
+		projectChoiceBox.setOnAction(event->{
+			selectedProject = projectChoiceBox.getValue();
+		});
+		
+		lifeCycleBox.setOnAction(event->{
+			selectedLifeCycle = lifeCycleBox.getValue();
+		});
+		
+		effortBox1.setOnAction(event->{
+			selectedEffortBox1 = effortBox1.getValue();
+		});
+		
+		effortBox2.setOnAction(event->{
+			selectedEffortBox2 = effortBox2.getValue();
+		});
+		
 	}
 
 	public void setLogin(Login login) {
 		this.login = login;
-		
+
 	}
 }
