@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 
 public class LoginViewController {
+    public PopUpViewController popUpController;
     private Scene scene;
     private Stage stage;
     private Login login = new Login();
@@ -70,6 +71,8 @@ public class LoginViewController {
 
         stage.setScene(scene);
         stage.show();
+        popUpController = new PopUpViewController();
+        popUpController.startInactivityTimer(stage);
     }
 
     private boolean containsUpperCase(String str) {
