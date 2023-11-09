@@ -174,6 +174,44 @@ public class DisplayViewController {
 	        stage.show();
 	        System.out.println("Finished loading defect log console...");
 	    }
+	 
+	 @FXML
+	  private void onPlanningPokerDashboardButtonClick() throws IOException {
+	        // Load the FXML file
+		 System.out.println("Loading planning poker console...");
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("PlanningPokerPage.fxml"));
+	        Parent root = loader.load();
+	        
+	        // Get the current stage (window)
+	        Stage stage = (Stage) projectChoiceBox.getScene().getWindow();
+	        
+	        // Create a new scene with the loaded FXML root
+	        Scene scene = new Scene(root);
+	        
+	        // Set the new scene to the current stage
+	        stage.setScene(scene);
+	        stage.show();
+	        System.out.println("Finished loading planning poker console...");
+	    }
+	 
+	 @FXML
+	  private void onManagerDashboardButtonClick() throws IOException {
+	        // Load the FXML file
+		 System.out.println("Loading manager console...");
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("ManagerDashboardPage.fxml"));
+	        Parent root = loader.load();
+	        
+	        // Get the current stage (window)
+	        Stage stage = (Stage) projectChoiceBox.getScene().getWindow();
+	        
+	        // Create a new scene with the loaded FXML root
+	        Scene scene = new Scene(root);
+	        
+	        // Set the new scene to the current stage
+	        stage.setScene(scene);
+	        stage.show();
+	        System.out.println("Finished loading manager console...");
+	    }
 	@FXML
 	public void initialize() {
 		System.out.println("Initializing...");
