@@ -1,18 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--Written by Matthew Mulderink-->
 <!--Written by Sabrina Nelson-->
+
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DefinitionsPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1351.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DefinitionsPageController">
    <children>
-      <Button fx:id="DefBackToHome" layoutX="274.0" layoutY="353.0" mnemonicParsing="false" text="Back to Home" onAction="#onBackToHomeButtonClick"/>
-      <Label fx:id="DefTitle" layoutX="233.0" layoutY="20.0" text="Definitions">
+      <Button fx:id="DefBackToHome" layoutX="784.0" layoutY="11.0" mnemonicParsing="false" onAction="#onBackToHomeButtonClick" prefHeight="38.0" prefWidth="91.0" text="Back to Home" />
+       <Text layoutX="564.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Definitions Page">
          <font>
-            <Font size="36.0" />
+            <Font size="24.0" />
          </font>
-      </Label>
+      </Text>
+
+                  <TableView fx:id="table" editable="true" layoutX="10.0" layoutY="65.0" prefHeight="354.0" prefWidth="1276.0">
+        <columns>
+            <TableColumn fx:id="ProjectNumber" minWidth="0.0" prefWidth="44.333335876464844" text="1a" />
+          <TableColumn fx:id="ProjectName" prefWidth="141.0" text="Specific Project Names" />
+            <TableColumn minWidth="0.0" prefWidth="42.0" text="1b. Specify Life Cycle Steps for each Project (Use the numbers from list number 2)">
+               <columns>
+                <TableColumn fx:id="Step1" minWidth="0.0" prefWidth="42.0" text="1" />
+                  <TableColumn fx:id="Step2" minWidth="0.0" prefWidth="42.0" text="2" />
+                  <TableColumn fx:id="Step3" minWidth="0.0" prefWidth="42.0" text="3" />
+                  <TableColumn fx:id="Step4" minWidth="0.0" prefWidth="42.0" text="4" />
+                  <TableColumn fx:id="Step5" minWidth="0.0" prefWidth="42.0" text="5" />
+                  <TableColumn fx:id="Step6" minWidth="0.0" prefWidth="42.0" text="6" />
+                  <TableColumn fx:id="Step7" minWidth="0.0" prefWidth="42.0" text="7" />
+                  <TableColumn fx:id="Step8" minWidth="0.0" prefWidth="42.0" text="8" />
+                  <TableColumn fx:id="Step9" minWidth="0.0" prefWidth="42.0" text="9" />
+                  <TableColumn fx:id="Step10" minWidth="0.0" prefWidth="42.0" text="10" />
+                  <TableColumn fx:id="Step11" minWidth="0.0" prefWidth="42.0" text="11" />
+                  <TableColumn fx:id="Step12" minWidth="0.0" prefWidth="42.0" text="12" />
+                  <TableColumn fx:id="Step13" minWidth="0.0" prefWidth="42.0" text="13" />
+                  <TableColumn fx:id="Step14" minWidth="0.0" prefWidth="42.0" text="14" />
+                  <TableColumn fx:id="Step15" minWidth="0.0" prefWidth="42.0" text="15" />
+                  <TableColumn fx:id="Step16" minWidth="0.0" prefWidth="42.0" text="16" />
+                  <TableColumn fx:id="Step17" minWidth="0.0" prefWidth="42.0" text="17" />
+                  <TableColumn fx:id="Step18" minWidth="0.0" prefWidth="42.0" text="18" />
+                  <TableColumn fx:id="Step19" minWidth="0.0" prefWidth="42.0" text="19" />
+                  <TableColumn fx:id="Step20" minWidth="0.0" prefWidth="42.0" text="20" />
+                  <TableColumn fx:id="Step21" minWidth="0.0" prefWidth="42.0" text="21" />
+                  <TableColumn fx:id="Step22" minWidth="0.0" prefWidth="42.0" text="22" />
+                  <TableColumn fx:id="Step23" minWidth="0.0" prefWidth="42.0" text="23" />
+                  <TableColumn fx:id="Step24" minWidth="0.0" prefWidth="42.0" text="24" />
+                  <TableColumn fx:id="Step25" minWidth="0.0" prefWidth="42.0" text="25" />
+               </columns>
+            </TableColumn>
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <TableView layoutX="13.0" layoutY="428.0" prefHeight="904.0" prefWidth="413.0">
+        <columns>
+            <TableColumn prefWidth="75.0" text="2. Specify the Life Cycle Steps here:">
+               <columns>
+                <TableColumn fx:id="Step" prefWidth="61.0" text="Step" />
+                <TableColumn fx:id="LifeCycleStep" prefWidth="273.0" text="Life Cycle Step" />
+                  <TableColumn fx:id="EffortCategory" prefWidth="39.0" text="EC" />
+                  <TableColumn fx:id="Default" prefWidth="39.0" text="D" />
+               </columns>
+            </TableColumn>
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <TableView fx:id="EffortCategories" layoutX="434.0" layoutY="427.0" prefHeight="216.0" prefWidth="437.0">
+        <columns>
+            <TableColumn prefWidth="456.0" text="3. Specify the Effort Categories here:">
+               <columns>
+                <TableColumn fx:id="Step" text="Step" />
+                <TableColumn fx:id="EffortCategory" prefWidth="456.0" text="Effort Category" />
+               </columns>
+            </TableColumn>
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <TableView layoutX="882.0" layoutY="427.0" prefHeight="347.0" prefWidth="405.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="4. Specify the Plans here:">
+               <columns>
+                <TableColumn fx:id="Step" prefWidth="64.0" text="Step" />
+                  <TableColumn fx:id="Plans" prefWidth="396.0" text="Plans" />
+               </columns>
+            </TableColumn>
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <TableView layoutX="435.0" layoutY="649.0" prefHeight="309.0" prefWidth="439.0">
+        <columns>
+            <TableColumn prefWidth="75.0" text="5. Specify the Deliverables">
+               <columns>
+                <TableColumn fx:id="Step" prefWidth="59.0" text="Step" />
+                <TableColumn fx:id="Deliverables" prefWidth="395.0" text="Deliverables" />
+               </columns>
+            </TableColumn>
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <TableView layoutX="433.0" layoutY="964.0" prefHeight="367.0" prefWidth="442.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="6. Specify the Interruptions here:">
+               <columns>
+                <TableColumn fx:id="Step" prefWidth="57.66668701171875" text="Step" />
+                  <TableColumn fx:id="Interruption" prefWidth="404.33331298828125" text="Interruption" />
+               </columns>
+            </TableColumn>
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <TableView layoutX="882.0" layoutY="779.0" prefHeight="348.0" prefWidth="406.0">
+        <columns>
+            <TableColumn prefWidth="457.0" text="7. Specific the defect categories">
+               <columns>
+                <TableColumn fx:id="Step" prefWidth="46.6666259765625" text="Step" />
+                <TableColumn fx:id="Defect" prefWidth="409.3333740234375" text="Defect" />
+               </columns>
+            </TableColumn>
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
    </children>
 </AnchorPane>
