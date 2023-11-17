@@ -8,10 +8,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +31,13 @@ public class EffortLogEditorViewController {
 	@FXML
 	private ChoiceBox<String> Plan;
 	
+	@FXML
+	private TextField Date;
+	@FXML
+	private TextField StartTime;
+	@FXML
+	private TextField StopTime;
+	
     @FXML
     private void onBackToHomeButtonClick(ActionEvent event) throws IOException {
         // Load the FXML file for the main screen
@@ -42,29 +52,16 @@ public class EffortLogEditorViewController {
         stage.show();
     }
     
+   
+    
     public List<String> readDataFromFile(String fileName) {
         List<String> data = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
-            StringBuilder entryBuilder = new StringBuilder();
             while ((line = reader.readLine()) != null) {
-                // Skip empty lines and lines without a colon
-                if (line.trim().isEmpty() || !line.contains(":")) {
-                    if (entryBuilder.length() > 0) {
-                        // Add the combined entry to the data list and reset the builder
-                        data.add(entryBuilder.toString().trim());
-                        entryBuilder.setLength(0);
-                    }
-                    continue;
+                if (!line.trim().isEmpty()) {
+                    data.add(line);
                 }
-
-                // Remove the section before the colon and append to the current entry
-                String entry = line.substring(line.indexOf(":") + 2); // +2 to skip ": "
-                entryBuilder.append(entry).append(", ");
-            }
-            // Add the last combined entry to the data list (if any)
-            if (entryBuilder.length() > 0) {
-                data.add(entryBuilder.toString().trim());
             }
         } catch (IOException e) {
             e.printStackTrace(); // Handle the exception properly in your application
@@ -72,6 +69,52 @@ public class EffortLogEditorViewController {
         return data;
     }
 
+
+    @FXML
+    private void onDeleteEntryButtonClick(ActionEvent event) {
+        String selectedEntry = SelectEffortLogEntry.getValue();
+        if ("None Selected".equals(selectedEntry)) {
+            // Handle this case as desired, e.g., show an error message.
+            return;
+        }
+
+        // Read the data from the file
+        List<String> dataFromFile = readDataFromFile("data.txt");
+
+        // Remove the selected entry
+        dataFromFile.remove(selectedEntry);
+
+        // Write the updated data back to the file
+        writeDataToFile("data.txt", dataFromFile);
+
+        // Clear the ChoiceBox and repopulate it with the updated data
+        SelectEffortLogEntry.getItems().clear();
+        dataFromFile.add(0, "None Selected");
+        SelectEffortLogEntry.setItems(FXCollections.observableArrayList(dataFromFile));
+    }
+
+    public void writeDataToFile(String fileName, List<String> data) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            for (String entry : data) {
+                writer.write(entry);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception properly in your application
+        }
+    }
+
+    @FXML
+    private void onClearEffortLogButtonClick(ActionEvent event) {
+    	SelectProject.getSelectionModel().clearSelection();
+        Date.clear();
+        StartTime.clear();
+        StopTime.clear();
+        SelectEffortLogEntry.getSelectionModel().clearSelection();
+        LifeCycle.getSelectionModel().clearSelection();
+        EffortCategory.getSelectionModel().clearSelection();
+        Plan.getSelectionModel().clearSelection();
+    }
     
     public void initialize() {
         System.out.println("Initializing...");
@@ -89,6 +132,5 @@ public class EffortLogEditorViewController {
         Plan.setItems(FXCollections.observableArrayList("Project Plan", "Risk Management Plan", "Conceptual Design Plan", "Detailed Design Plan",
                 "Implementation Plan"));
     }
-
    
 }

@@ -8,8 +8,6 @@ import java.io.PrintWriter;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-
 import javafx.collections.*;
 
 import javafx.fxml.*;
@@ -59,7 +57,7 @@ public class DisplayViewController {
 	         clockStatusLabel.setStyle("-fx-text-fill: white; -fx-background-color: red; -fx-padding: 10;");
 	         writeActivityLog();
 	    }
-
+	    
 	    private void writeActivityLog() {
 	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm:ss a M/d/yyyy");
 	        String startFormatted = startTime.format(formatter);
@@ -74,21 +72,24 @@ public class DisplayViewController {
 	            (absSeconds % 86400) / 3600,
 	            ((absSeconds % 86400) % 3600) / 60,
 	            (absSeconds % 60));
+
+	        // Format the entry as a single string
+	        String entry = login.getName() + ", " +
+	            startFormatted + ", " +
+	            endFormatted + ", " +
+	            elapsedTime + ", " +
+	            selectedProject + ", " +
+	            selectedLifeCycle + ", " +
+	            selectedEffortBox1 + ", " +
+	            selectedEffortBox2 + ",";
+
 	        try (PrintWriter out = new PrintWriter(new FileWriter("data.txt", true))) {
-	            out.println("***");
-	            out.println("User: " + login.getName());
-	            out.println("Activity Started: " + startFormatted);
-	            out.println("Activity Ended: " + endFormatted);
-	            out.println("Total time elapsed: " + elapsedTime);
-	            out.println("Project: " + selectedProject);
-	            out.println("Life Cycle: " + selectedLifeCycle);
-	            out.println("Effort Category: " + selectedEffortBox1);
-	            out.println("Effort Category 2: " + selectedEffortBox2);
-	            out.println("***");
+	            out.println(entry);
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
 	    }
+
 
 	 @FXML
 	    private void onELEditorButtonClick() throws IOException {
@@ -173,44 +174,6 @@ public class DisplayViewController {
 	        stage.setScene(scene);
 	        stage.show();
 	        System.out.println("Finished loading defect log console...");
-	    }
-	 
-	 @FXML
-	  private void onPlanningPokerDashboardButtonClick() throws IOException {
-	        // Load the FXML file
-		 System.out.println("Loading planning poker console...");
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("PlanningPokerPage.fxml"));
-	        Parent root = loader.load();
-	        
-	        // Get the current stage (window)
-	        Stage stage = (Stage) projectChoiceBox.getScene().getWindow();
-	        
-	        // Create a new scene with the loaded FXML root
-	        Scene scene = new Scene(root);
-	        
-	        // Set the new scene to the current stage
-	        stage.setScene(scene);
-	        stage.show();
-	        System.out.println("Finished loading planning poker console...");
-	    }
-	 
-	 @FXML
-	  private void onManagerDashboardButtonClick() throws IOException {
-	        // Load the FXML file
-		 System.out.println("Loading manager console...");
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("ManagerDashboardPage.fxml"));
-	        Parent root = loader.load();
-	        
-	        // Get the current stage (window)
-	        Stage stage = (Stage) projectChoiceBox.getScene().getWindow();
-	        
-	        // Create a new scene with the loaded FXML root
-	        Scene scene = new Scene(root);
-	        
-	        // Set the new scene to the current stage
-	        stage.setScene(scene);
-	        stage.show();
-	        System.out.println("Finished loading manager console...");
 	    }
 	@FXML
 	public void initialize() {
