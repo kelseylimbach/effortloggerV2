@@ -5,5 +5,7 @@ module ELFX {
 	requires javafx.base;
 	requires java.desktop;
 	
-	opens application to javafx.graphics, javafx.fxml;
+	opens application to javafx.graphics, javafx.fxml, java.base;
+	
+	exports application;
 }
