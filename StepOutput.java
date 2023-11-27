@@ -6,8 +6,8 @@ public class StepOutput {
 	String Step, Output;
 	
 	public StepOutput(String step, String output) {
-		Step = step;
-		Output = output;
+		setStep(step);
+		setOutput(output);
 	}
 	
 	
