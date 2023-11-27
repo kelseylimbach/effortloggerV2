@@ -29,93 +29,93 @@ import java.util.ResourceBundle;
 public class DefinitionsPageController implements Initializable {
 
 	// init
-    @FXML
-    private Label DefTitle;
-    
-    @FXML
-    private TableView<Projects> table;
-
-    @FXML
-    private TableColumn<Projects, String> ProjectNameCol;
-    
-    @FXML
-    private TableColumn<Projects, Integer> ProjectNumberCol;
-    
-    @FXML
-    private TableColumn<Projects, Integer> Step1Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step2Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step3Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step4Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step5Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step6Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step7Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step8Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step9Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step10Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step11Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step12Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step13Col;
-    
-    @FXML
-    private TableColumn<Projects, Integer> Step14Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step15Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step16Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step17Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step18Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step19Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step20Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step21Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step22Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step23Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step24Col;
-     
-    @FXML
-    private TableColumn<Projects, Integer> Step25Col;
-    
+//    @FXML
+//    private Label DefTitle;
+//    
+//    @FXML
+//    private TableView<Projects> table;
+//
+//    @FXML
+//    private TableColumn<Projects, String> ProjectNameCol;
+//    
+//    @FXML
+//    private TableColumn<Projects, Integer> ProjectNumberCol;
+//    
+//    @FXML
+//    private TableColumn<Projects, Integer> Step1Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step2Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step3Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step4Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step5Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step6Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step7Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step8Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step9Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step10Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step11Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step12Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step13Col;
+//    
+//    @FXML
+//    private TableColumn<Projects, Integer> Step14Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step15Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step16Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step17Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step18Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step19Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step20Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step21Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step22Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step23Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step24Col;
+//     
+//    @FXML
+//    private TableColumn<Projects, Integer> Step25Col;
+//    
     /*
     @FXML
     private TextField ProjectName;
@@ -270,18 +270,18 @@ public class DefinitionsPageController implements Initializable {
     	/*
     }	
 	*/
-	public void changeProjectName(CellEditEvent edittedCell)
-	{
-    		Projects projectSelected =  table.getSelectionModel().getSelectedItem();
-    		projectSelected.setProjectName(edittedCell.getNewValue().toString());
-	}
+//	public void changeProjectName(CellEditEvent edittedCell)
+//	{
+//    		Projects projectSelected =  table.getSelectionModel().getSelectedItem();
+//    		projectSelected.setProjectName(edittedCell.getNewValue().toString());
+//	}
 
 
-    public ObservableList<Projects> getProjects() {
-        ObservableList<Projects> projects = FXCollections.observableArrayList();
-        projects.add(new Projects(1, "Business Project", 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		return projects;
-	}
+//    public ObservableList<Projects> getProjects() {
+//        ObservableList<Projects> projects = FXCollections.observableArrayList();
+//        projects.add(new Projects(1, "Business Project", 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+//		return projects;
+//	}
 
 
 	@FXML
@@ -303,20 +303,20 @@ public class DefinitionsPageController implements Initializable {
 
 	
     // init
-    @FXML
-    private TableView<StepOutput> EffortCategories;
-
-    @FXML
-    private TableColumn<StepOutput, String> ECStepCol;
-    
-    @FXML
-    private TableColumn<StepOutput, String> ECOutputCol;
-    
-	@FXML
-	private TextField ECstep;
-	
-	@FXML
-	private TextField ECoutput;
+//    @FXML
+//    private TableView<StepOutput> EffortCategories;
+//
+//    @FXML
+//    private TableColumn<StepOutput, String> ECStepCol;
+//    
+//    @FXML
+//    private TableColumn<StepOutput, String> ECOutputCol;
+//    
+//	@FXML
+//	private TextField ECstep;
+//	
+//	@FXML
+//	private TextField ECoutput;
 	/*
 	public void changeECStep(CellEditEvent<StepOutput, String> editCell){
 		StepOutput selected = (StepOutput) EffortCategories.getSelectionModel().getSelectedItem();
