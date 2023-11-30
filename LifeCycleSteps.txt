@@ -48,6 +48,3 @@
 48,,,
 49,,,
 50,,,
-
-
-// Written by Matthew Mulderink

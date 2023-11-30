@@ -8,6 +8,3 @@
 8,Report
 9,User Defined
 10,Other
-
-
-// Written by Matthew Mulderink
