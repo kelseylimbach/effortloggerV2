@@ -256,11 +256,65 @@ public class EffortLogEditorPageController {
         }
 		
 	}
+    
+	 ArrayList<String> EffortCategories = new ArrayList<>();
+	 ArrayList<String> Plan2 = new ArrayList<>();
+	 ArrayList<String> lifeCycles = new ArrayList<>();
+	 ArrayList<String> projectNames = new ArrayList<>();
+	 
+	 private void loadStepOutput(ArrayList<String> arr, String fileName, ChoiceBox<String> box) {
+		    try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+		        String line;
+		        while ((line = reader.readLine()) != null) {
+		            if (!line.matches("^\\d+,$")) {
+		                String[] parts = line.split(",", 2);
+		                if (parts.length > 1) {
+		                	arr.add(parts[1].trim());
+		                }
+		            }
+		        }
+		        box.setItems(FXCollections.observableArrayList(arr));
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+		}
+	 
+	 private void loadLifeCycle(ArrayList<String> arr, String fileName, ChoiceBox<String> box) {
+		    try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+		        String line;
+		        while ((line = reader.readLine()) != null) {
+		            String[] parts = line.split(",", -1);
+		            if (parts.length >= 2 && !parts[1].trim().isEmpty()) {
+		            	arr.add(parts[1].trim());
+		            }
+		        }
+		        box.setItems(FXCollections.observableArrayList(arr));
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+		} 
+	 
+	 private void loadProjects(ArrayList<String> arr, String fileName, ChoiceBox<String> box) {
+		    try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+		        String line;
+		        while ((line = reader.readLine()) != null) {
+		            String[] parts = line.split(",", -1);
+		            if (parts.length >= 2 && !parts[1].trim().isEmpty()) {
+		            	arr.add(parts[1].trim());
+		            }
+		        }
+		        box.setItems(FXCollections.observableArrayList(arr));
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+		}
+
 
 	public void initialize() {
         System.out.println("Initializing...");
         //initialize the select project choice box
-        SelectProject.setItems(FXCollections.observableArrayList("Business Project", "Development Project"));
+        loadProjects(projectNames, "Projects.txt", SelectProject);
+        //SelectProject.setItems(FXCollections.observableArrayList("Business Project", "Development Project"));
 
         List<String> dataFromFile = null;
 		dataFromFile = readDataFromFile("data.txt");
@@ -270,11 +324,15 @@ public class EffortLogEditorPageController {
         //intitalize the choice boxes
         SelectEffortLogEntry.setItems(FXCollections.observableArrayList(dataFromFile));
 
-        LifeCycle.setItems(FXCollections.observableArrayList("Planning", "Information Gathering", "Information Understanding", "Verifying",
-                "Outlining", "Drafting", "Finalizing", "Team Meeting", "Coach Meeting", "Stakeholder Meeting"));
-        EffortCategory.setItems(FXCollections.observableArrayList("Plans", "Deliverables", "Interruptions", "Defects", "Others"));
-        Plan.setItems(FXCollections.observableArrayList("Project Plan", "Risk Management Plan", "Conceptual Design Plan", "Detailed Design Plan",
-                "Implementation Plan"));
+        loadLifeCycle(lifeCycles, "LifeCycleSteps.txt", LifeCycle);
+        //LifeCycle.setItems(FXCollections.observableArrayList("Planning", "Information Gathering", "Information Understanding", "Verifying",
+        //        "Outlining", "Drafting", "Finalizing", "Team Meeting", "Coach Meeting", "Stakeholder Meeting"));
+        loadStepOutput(EffortCategories, "EffortCategories.txt", EffortCategory);
+        //EffortCategory.setItems(FXCollections.observableArrayList("Plans", "Deliverables", "Interruptions", "Defects", "Others"));
+        //
+        loadStepOutput(Plan2, "Plans.txt", Plan);
+        /*Plan.setItems(FXCollections.observableArrayList("Project Plan", "Risk Management Plan", "Conceptual Design Plan", "Detailed Design Plan",
+                "Implementation Plan"));*/
     }
    
 }

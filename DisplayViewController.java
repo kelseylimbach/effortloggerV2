@@ -1,5 +1,7 @@
 package application;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 
 import java.io.IOException;
@@ -10,6 +12,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
 import javafx.collections.*;
 
@@ -39,8 +42,60 @@ public class DisplayViewController {
 	 private Login login;
 	 private String selectedProject, selectedLifeCycle, selectedEffortBox1, selectedEffortBox2;
 	 private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a M/d/yyyy");
+	 
+	 
+	 ArrayList<String> EffortCategories = new ArrayList<>();
+	 ArrayList<String> Plan = new ArrayList<>();
+	 ArrayList<String> lifeCycles = new ArrayList<>();
+	 ArrayList<String> projectNames = new ArrayList<>();
 
 
+	 private void loadStepOutput(ArrayList<String> arr, String fileName, ChoiceBox<String> box) {
+		    try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+		        String line;
+		        while ((line = reader.readLine()) != null) {
+		            if (!line.matches("^\\d+,$")) {
+		                String[] parts = line.split(",", 2);
+		                if (parts.length > 1) {
+		                	arr.add(parts[1].trim());
+		                }
+		            }
+		        }
+		        box.setItems(FXCollections.observableArrayList(arr));
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+		}
+	 
+	 private void loadLifeCycle(ArrayList<String> arr, String fileName, ChoiceBox<String> box) {
+		    try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+		        String line;
+		        while ((line = reader.readLine()) != null) {
+		            String[] parts = line.split(",", -1);
+		            if (parts.length >= 2 && !parts[1].trim().isEmpty()) {
+		            	arr.add(parts[1].trim());
+		            }
+		        }
+		        box.setItems(FXCollections.observableArrayList(arr));
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+		} 
+	 
+	 private void loadProjects(ArrayList<String> arr, String fileName, ChoiceBox<String> box) {
+		    try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+		        String line;
+		        while ((line = reader.readLine()) != null) {
+		            String[] parts = line.split(",", -1);
+		            if (parts.length >= 2 && !parts[1].trim().isEmpty()) {
+		            	arr.add(parts[1].trim());
+		            }
+		        }
+		        box.setItems(FXCollections.observableArrayList(arr));
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+		}
 
 	 @FXML
 	    private void onStartActivityButtonClick() {
@@ -182,12 +237,18 @@ public class DisplayViewController {
 	@FXML
 	public void initialize() {
 		System.out.println("Initializing...");
-		projectChoiceBox.setItems(FXCollections.observableArrayList("Business Project", "Development Project"));
-		 	lifeCycleBox.setItems(FXCollections.observableArrayList("Planning", "Information Gathering", "Information Understanding",
-				"Verifying", "Outlining", "Drafting", "Finalizing", "Team Meeting", "Coach Meeting", "Stakeholder Meeting"));
-		 	effortBox1.setItems(FXCollections.observableArrayList("Plans", "Deliverables", "Interruptions", "Defects", "Others"));
-		 	effortBox2.setItems(FXCollections.observableArrayList("Project Plan", "Risk Management Plan", "Conceptual Desing Plan",
-				 "Detailed Design Plan", "Implementation Plan"));
+		
+		loadProjects(projectNames, "Projects.txt", projectChoiceBox);
+		//projectChoiceBox.setItems(FXCollections.observableArrayList("Business Project", "Development Project"));
+		 	
+		loadLifeCycle(lifeCycles, "LifeCycleSteps.txt", lifeCycleBox);
+		//lifeCycleBox.setItems(FXCollections.observableArrayList("Planning", "Information Gathering", "Information Understanding",
+		//		"Verifying", "Outlining", "Drafting", "Finalizing", "Team Meeting", "Coach Meeting", "Stakeholder Meeting"));
+		 	
+		 	loadStepOutput(EffortCategories, "EffortCategories.txt", effortBox1);		 	
+		 	loadStepOutput(Plan, "Plans.txt", effortBox2);
+		 	//effortBox2.setItems(FXCollections.observableArrayList("Project Plan", "Risk Management Plan", "Conceptual Desing Plan",
+			//	 "Detailed Design Plan", "Implementation Plan"));
 
 		projectChoiceBox.setOnAction(event->{
 			selectedProject = projectChoiceBox.getValue();
