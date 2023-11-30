@@ -1,0 +1,18 @@
+1,Not specified
+2,10 Documentation
+3,20 Syntax
+4,30 Build, Package
+5,40 Assignments
+6,50 Interface
+7,60 Checking
+8,70 Data
+9,80 Function
+10,90 System
+11,100 Environment
+12,
+13,
+14,
+15,
+
+
+// Written by Matthew Mulderink

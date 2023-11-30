@@ -23,16 +23,31 @@ import javafx.stage.Stage;
 import java.awt.Button;
 import java.awt.Label;
 import java.awt.TextField;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 
 public class DefinitionsPageController implements Initializable {
 
 	@FXML
 	private void onBackToHomeButtonClick(ActionEvent event) throws IOException {
-        // Load the FXML file for the main screen
+		saveTableStepOutput("EffortCategories.txt");
+		saveTableStepOutput4("Plans.txt");
+		saveTableStepOutput5("Deliverables.txt");
+		saveTableStepOutput6("Interruptions.txt");
+		saveTableStepOutput7("DefectCategories.txt");
+		saveTableProjects("Projects.txt");
+		saveTableLifeCycle("LifeCycleSteps.txt");
+
+		// Load the FXML file for the main screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/DisplayPage.fxml"));
         Parent root = loader.load();
 
@@ -46,7 +61,6 @@ public class DefinitionsPageController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-	
 	
 	//table1
     @FXML
@@ -172,6 +186,8 @@ public class DefinitionsPageController implements Initializable {
     @FXML
     private TableColumn<StepOutput, String> outputColumn7;
     
+    
+    //Helpers
     public void projectEditHelper() {
     	ProjectNumberCol.setCellValueFactory(new PropertyValueFactory<Projects,String>("ProjectNumber"));
     	//ProjectNumberCol.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -432,13 +448,169 @@ public class DefinitionsPageController implements Initializable {
 	        item.setOutput(event.getNewValue());
 	    });	
     }
+   
+    
+    
+    //Load Project
+    private ObservableList<Projects> loadDataForProjects(String filePath) {
+        ObservableList<Projects> data = FXCollections.observableArrayList();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",", -1);
+                if (parts.length == 27) {
+                    data.add(new Projects(parts[0].trim(), parts[1].trim(),
+                    		parts[2].trim(), parts[3].trim(), parts[4].trim(),
+                    		parts[5].trim(), parts[6].trim(), parts[7].trim(),
+                    		parts[8].trim(), parts[9].trim(), parts[10].trim(),
+                    		parts[11].trim(), parts[12].trim(), parts[13].trim(),
+                    		parts[14].trim(), parts[15].trim(), parts[16].trim(),
+                    		parts[17].trim(), parts[18].trim(), parts[19].trim(),
+                    		parts[20].trim(), parts[21].trim(), parts[22].trim(),
+                    		parts[23].trim(), parts[24].trim(), parts[25].trim(), parts[26].trim()));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+    
+    public void saveTableProjects(String filePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (Projects item : table1.getItems()) {
+            	writer.write(item.getProjectNumber() + "," + item.getProjectName() + "," +
+            	item.getStep1() + "," +item.getStep2() + "," + item.getStep3() + "," +
+            	item.getStep4() + "," +item.getStep5() + "," + item.getStep6() + "," +
+            	item.getStep7() + "," +item.getStep8() + "," + item.getStep9() + "," +
+            	item.getStep10() + "," +item.getStep11() + "," + item.getStep12() + "," +
+            	item.getStep13() + "," +item.getStep14() + "," + item.getStep15() + "," +
+            	item.getStep16() + "," +item.getStep17() + "," + item.getStep18() + "," +
+            	item.getStep19() + "," +item.getStep20() + "," + item.getStep21() + "," +
+            	item.getStep22() + "," +item.getStep23() + "," + item.getStep24() + "," + item.getStep25());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Load Life Cycle
+    
+    //Load Life Cycles
+    private ObservableList<LifeCycle> loadDataForLifeCycle(String filePath) {
+        ObservableList<LifeCycle> data = FXCollections.observableArrayList();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",", -1);
+                if (parts.length == 4) {
+                    data.add(new LifeCycle(parts[0].trim(), parts[1].trim(),
+                    		parts[2].trim(), parts[3].trim()));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+    
+    public void saveTableLifeCycle(String filePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (LifeCycle item : table2.getItems()) {
+                writer.write(item.getStep() + "," + item.getLifeCycle() +
+                		"," + item.getEffortCategory() + "," + item.getDefault());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    //Load Tables 3-7
+    private ObservableList<StepOutput> loadDataForStepOutput(String filePath) {
+        ObservableList<StepOutput> data = FXCollections.observableArrayList();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",", -1);
+                String step = parts.length > 0 ? parts[0].trim() : "";
+                String output = parts.length > 1 ? parts[1].trim() : "";
+                data.add(new StepOutput(step, output));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+    
+    public void saveTableStepOutput(String filePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (StepOutput item : table3.getItems()) {
+                writer.write(item.getStep() + "," + item.getOutput());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void saveTableStepOutput4(String filePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (StepOutput item : table4.getItems()) {
+                writer.write(item.getStep() + "," + item.getOutput());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void saveTableStepOutput5(String filePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (StepOutput item : table5.getItems()) {
+                writer.write(item.getStep() + "," + item.getOutput());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void saveTableStepOutput6(String filePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (StepOutput item : table6.getItems()) {
+                writer.write(item.getStep() + "," + item.getOutput());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void saveTableStepOutput7(String filePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (StepOutput item : table7.getItems()) {
+                writer.write(item.getStep() + "," + item.getOutput());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     
 	public void initialize(URL url, ResourceBundle rb) {
 		//table1
 	    //table1.setEditable(true);
 	    //editHelper(stepColumn, outputColumn);
+		
+	    String table1FilePath = "Projects.txt";
+		
 		projectEditHelper();
-        ObservableList<Projects> dataT1 = FXCollections.observableArrayList(
+        ObservableList<Projects> dataT1 = loadDataForProjects(table1FilePath);
+        		/*
+        		FXCollections.observableArrayList(
                 new Projects("1", "Business Project","17","18","19","20","21","22","23","24","25","26",
                 		"","","","","","","","","","","","","","",""),
                 new Projects("2", "Development Project","1","2","3","4","5","6","7","8","9","10",
@@ -452,14 +624,19 @@ public class DefinitionsPageController implements Initializable {
                 new Projects("9", "","","","","","","","","","","","","","","","","","","","","","","","","",""),
                 new Projects("10", "","","","","","","","","","","","","","","","","","","","","","","","","","")
             );
+            */
         
         table1.setItems(dataT1);
         
         //table2
 	    table2.setEditable(true);
 	    lifeCycleHelper();
+	    
+	    String table2FilePath = "LifeCycleSteps.txt";
 
-        ObservableList<LifeCycle> dataT2 = FXCollections.observableArrayList(
+        ObservableList<LifeCycle> dataT2 = loadDataForLifeCycle(table2FilePath);
+        		/*
+        		FXCollections.observableArrayList(
                 new LifeCycle("1", "Problem Understanding", "2", "1"),
                 new LifeCycle("2", "Conceptual Design Plan", "1", "3"),
                 new LifeCycle("3", "Requirements", "2", "1"),
@@ -511,44 +688,56 @@ public class DefinitionsPageController implements Initializable {
                 new LifeCycle("49", "", "", ""),
                 new LifeCycle("50", "", "", "")
             );
-        
+        */
         table2.setItems(dataT2); 
         
         
 		//table3
 	    table3.setEditable(true);
 	    editHelper(stepColumn, outputColumn);
+	    
+	    String table3FilePath = "EffortCategories.txt";
 
-        ObservableList<StepOutput> dataT3 = FXCollections.observableArrayList(
+        ObservableList<StepOutput> dataT3 = loadDataForStepOutput(table3FilePath);
+        		/*
+        		: FXCollections.observableArrayList(
                 new StepOutput("1", "Plans"),
                 new StepOutput("2", "Deliverables"),
                 new StepOutput("3", "Interruptions"),
                 new StepOutput("4", "Defects"),
                 new StepOutput("5", "Others")
             );
-        
+        */
         table3.setItems(dataT3);
         
         
         //table4
 	    table4.setEditable(true);
 	    editHelper(stepColumn4, outputColumn4);
+	    
+	    String table4FilePath = "Plans.txt";
 
-        ObservableList<StepOutput> dataT4 = FXCollections.observableArrayList(
+        ObservableList<StepOutput> dataT4 = loadDataForStepOutput(table4FilePath);
+        		
+        		/* FXCollections.observableArrayList(
                 new StepOutput("1", "Project Plan"),
                 new StepOutput("2", "Risk Management Plan"),
                 new StepOutput("3", "Conceptual Design Plan"),
                 new StepOutput("4", "Detail Design Plan"),
                 new StepOutput("5", "Implementation Plan")
             );
-        
+        	*/
         table4.setItems(dataT4);
                 
         //table5
 	    table5.setEditable(true);
 	    editHelper(stepColumn5, outputColumn5);
 
-        ObservableList<StepOutput> dataT5 = FXCollections.observableArrayList(
+	    String table5FilePath = "Deliverables.txt";
+	    
+        ObservableList<StepOutput> dataT5 = loadDataForStepOutput(table5FilePath);
+        		/*
+        		FXCollections.observableArrayList(
                 new StepOutput("1", "Conceptual Design"),
                 new StepOutput("2", "Detailed Design"),
                 new StepOutput("3", "Test Cases"),
@@ -559,19 +748,26 @@ public class DefinitionsPageController implements Initializable {
                 new StepOutput("8", "Report"),
                 new StepOutput("9", "User Defined"),
                 new StepOutput("10", "Other")
+                
             );
+            */
         
         table5.setItems(dataT5);
         
 		//table6
 	    table6.setEditable(true);
 	    editHelper(stepColumn6, outputColumn6);
+	    
+	    String table6FilePath = "Interruptions.txt";
 	
-	    ObservableList<StepOutput> dataT6 = FXCollections.observableArrayList(
+	    ObservableList<StepOutput> dataT6 = loadDataForStepOutput(table6FilePath);
+	    		/*
+	    		FXCollections.observableArrayList(
+	    		
 	            new StepOutput("1", "Break"),
 	            new StepOutput("2", "Phone"),
 	            new StepOutput("3", "Teammate"),
-	            new StepOutput("4", "Vistor"),
+	            new StepOutput("4", "Visitor"),
 	            new StepOutput("5", "Other"),
 	            new StepOutput("6", ""),
 	            new StepOutput("7", ""),
@@ -579,14 +775,19 @@ public class DefinitionsPageController implements Initializable {
 	            new StepOutput("9", ""),
 	            new StepOutput("10", "")
 	        );
+	        */
 	    
 	    table6.setItems(dataT6);        
 	
 		//table7
 	    table7.setEditable(true);
 	    editHelper(stepColumn7, outputColumn7);
+	    
+	    String table7FilePath = "DefectCategories.txt";
 	
-	    ObservableList<StepOutput> dataT7 = FXCollections.observableArrayList(
+	    ObservableList<StepOutput> dataT7 = loadDataForStepOutput(table7FilePath);
+	    	/*	
+	    		FXCollections.observableArrayList(
 	            new StepOutput("1", "Not specified"),
 	            new StepOutput("2", "10 Documentation"),
 	            new StepOutput("3", "20 Syntax"),
@@ -603,6 +804,7 @@ public class DefinitionsPageController implements Initializable {
 	            new StepOutput("14", ""),
 	            new StepOutput("15", "")
 	        );
+	    	*/
 	    
 	    table7.setItems(dataT7);
 

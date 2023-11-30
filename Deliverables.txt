@@ -1,0 +1,13 @@
+1,Conceptual Design
+2,Detailed Design
+3,Test Cases
+4,Solution
+5,Reflection
+6,Outline
+7,Draft
+8,Report
+9,User Defined
+10,Other
+
+
+// Written by Matthew Mulderink

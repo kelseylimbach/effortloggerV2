@@ -1,0 +1,53 @@
+1,Problem Understanding,2,1
+2,Conceptual Design Plan,1,3
+3,Requirements,2,1
+4,Conceptual Design Plan Review,2,1
+5,Conceptual Design Review,2,1
+6,Detailed Design Plan,1,4
+7,Detailed Design/Prototype,2,2
+8,Detailed Design Review,2,2
+9,Implementation Plan,1,5
+10,Test Case Generation,2,3
+11,Solution Specification,2,4
+12,Solution Review,2,4
+13,Solution Implementation,2,4
+14,Unit/System Test,2,4
+15,Reflection,2,4
+16,Repository Update,2,4
+17,Planning,1,1
+18,Information Gathering,2,1
+19,Information Understanding,2,1
+20,Verifying,2,1
+21,Outlining,2,6
+22,Drafting,2,7
+23,Finalizing,2,8
+24,Team Meeting,2,1
+25,Coach Meeting,2,1
+26,Stakeholder Meeting,2,1
+27,,,
+28,,,
+29,,,
+30,,,
+31,,,
+32,,,
+33,,,
+34,,,
+35,,,
+36,,,
+37,,,
+38,,,
+39,,,
+40,,,
+41,,,
+42,,,
+43,,,
+44,,,
+45,,,
+46,,,
+47,,,
+48,,,
+49,,,
+50,,,
+
+
+// Written by Matthew Mulderink
