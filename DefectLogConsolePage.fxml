@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--Written by Sabrina Nelson-->
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DefectLogConsolePageController">
-   <children>
-      <Button fx:id="DefectBackToHome" layoutX="405.0" layoutY="433.0" mnemonicParsing="false" onAction="#onBackToHomeButtonClick" text="Back to the Effort Log Console" />
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="488.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DefectLogConsoleViewController">
+  <children>
+      <Button fx:id="DefectBackToHome" layoutX="403.0" layoutY="435.0" mnemonicParsing="false" onAction="#onBackToHomeButtonClick" text="Back to the Effort Log Console" />
       <Label fx:id="DefectConsoleTitle" layoutX="196.0" layoutY="14.0" text="Defect Log Console">
          <font>
             <Font size="24.0" />
@@ -21,27 +20,30 @@
       <ChoiceBox fx:id="projectPicker" layoutX="45.0" layoutY="71.0" prefWidth="150.0" />
       <Label layoutX="31.0" layoutY="48.0" text="1. Select the project" />
       <Label layoutX="376.0" layoutY="48.0" text="2.a. Clear this Project's Defect Log" />
-      <Label layoutX="31.0" layoutY="96.0" text="2.b. Select one of the following defects to make it the current defect or press &quot;Create a new Defect&quot;" />
-      <ChoiceBox fx:id="defectPicker" layoutX="45.0" layoutY="113.0" prefWidth="150.0" />
+      <Label layoutX="31.0" layoutY="108.0" text="2.b. Select one of the following defects to make it the current defect or press &quot;Create a new Defect&quot;" />
+      <ChoiceBox fx:id="defectPicker" layoutX="45.0" layoutY="125.0" prefWidth="150.0" />
       <Button fx:id="clearLogButton" layoutX="400.0" layoutY="71.0" mnemonicParsing="false" onAction="#onClearLogButtonClick" text="Clear this Defect Log" />
-      <Button fx:id="newDefectButton" layoutX="401.0" layoutY="113.0" mnemonicParsing="false" onAction="#onNewDefectButtonClick" text="Create a new Defect" />
-      <Button fx:id="closeButton" layoutX="353.0" layoutY="187.0" mnemonicParsing="false" onAction="#onCloseButtonClick" text="Close" />
-      <Button fx:id="reopenButton" layoutX="437.0" layoutY="187.0" mnemonicParsing="false" onAction="#onReopenButtonClick" text="Reopen" />
-      <Label fx:id="statusLabel" layoutX="351.0" layoutY="161.0" text="Status: closed" />
-      <Label layoutX="31.0" layoutY="146.0" text="3. Define or update the following Defect attributes:" />
-      <Label layoutX="45.0" layoutY="170.0" text="Num" />
-      <Label layoutX="85.0" layoutY="170.0" text="Defect Name" />
-      <Label layoutX="42.0" layoutY="213.0" text="Defect Symptoms or Cause/Resolution" />
-      <TextField layoutX="79.0" layoutY="188.0" />
-      <TextArea layoutX="42.0" layoutY="230.0" prefHeight="43.0" prefWidth="535.0" />
-      <Label layoutX="20.0" layoutY="409.0" text="4. Press the &quot;Update the Current Defect&quot; button to save the changes made above" />
-      <Button fx:id="updateCurrentDefectButton" layoutX="42.0" layoutY="433.0" mnemonicParsing="false" onAction="#onUpdateDefectButtonClick" text="Update the Current Defect" />
-      <Button fx:id="deleteDefectButton" layoutX="234.0" layoutY="433.0" mnemonicParsing="false" onAction="#onDeleteDefectButtonClick" text="Delete the Current Defect" />
-      <Label layoutX="42.0" layoutY="378.0" text="These attributes have been saved" />
-      <Label layoutX="378.0" layoutY="387.0" text="Fix:" />
-      <ChoiceBox fx:id="fixChoiceBox" layoutX="419.0" layoutY="383.0" prefWidth="150.0" />
-      <Label layoutX="45.0" layoutY="284.0" text="Step when injected" />
-      <Label layoutX="228.0" layoutY="284.0" text="Step when removed" />
-      <Label layoutX="406.0" layoutY="284.0" text="Defect Category" />
-   </children>
+      <Button fx:id="newDefectButton" layoutX="401.0" layoutY="125.0" mnemonicParsing="false" onAction="#onNewDefectButtonClick" text="Create a new Defect" />
+      <Button fx:id="closeButton" layoutX="353.0" layoutY="199.0" mnemonicParsing="false" onAction="#onCloseButtonClick" text="Close" />
+      <Button fx:id="reopenButton" layoutX="437.0" layoutY="199.0" mnemonicParsing="false" onAction="#onReopenButtonClick" text="Reopen" />
+      <Label fx:id="statusLabel" layoutX="351.0" layoutY="173.0" text="Status: closed" />
+      <Label layoutX="31.0" layoutY="158.0" text="3. Define or update the following Defect attributes:" />
+      <Label layoutX="45.0" layoutY="182.0" text="Num" />
+      <Label layoutX="85.0" layoutY="182.0" text="Defect Name" />
+      <TextField fx:id="defectName" layoutX="79.0" layoutY="200.0" />
+      <Label layoutX="42.0" layoutY="230.0" text="Defect Symptoms or Cause/Resolution" />
+      <TextArea fx:id="defectSymptoms" layoutX="42.0" layoutY="246.0" prefHeight="43.0" prefWidth="535.0" />
+      <Label layoutX="18.0" layoutY="411.0" text="4. Press the &quot;Update the Current Defect&quot; button to save the changes made above" />
+      <Button fx:id="updateCurrentDefectButton" layoutX="40.0" layoutY="435.0" mnemonicParsing="false" onAction="#onUpdateDefectButtonClick" text="Update the Current Defect" />
+      <Button fx:id="deleteDefectButton" layoutX="232.0" layoutY="435.0" mnemonicParsing="false" onAction="#onDeleteCurrentDefectButtonClick" text="Delete the Current Defect" />
+      <Label layoutX="40.0" layoutY="380.0" text="These attributes have been saved" />
+      <Label layoutX="376.0" layoutY="382.0" text="Fix:" />
+      <ChoiceBox fx:id="fixChoiceBox" layoutX="417.0" layoutY="378.0" prefWidth="150.0" />
+      <Label layoutX="45.0" layoutY="296.0" text="Step when injected" />
+      <Label layoutX="228.0" layoutY="296.0" text="Step when removed" />
+      <Label layoutX="406.0" layoutY="296.0" text="Defect Category" />
+      <ChoiceBox fx:id="stepWhenInjected" layoutX="42.0" layoutY="321.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="stepWhenRemoved" layoutX="228.0" layoutY="321.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="defectCategory" layoutX="403.0" layoutY="321.0" prefWidth="150.0" />
+   </children> 
 </AnchorPane>
