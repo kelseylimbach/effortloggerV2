@@ -57,6 +57,14 @@ public class DefectLogConsolePageController {
     @FXML
     private Label statusLabel;
     
+    
+    @FXML
+	private ChoiceBox<String> stepWhenInjected;
+    
+    @FXML
+	private ChoiceBox<String> stepWhenRemoved;
+    
+    
     @FXML
 	private ChoiceBox<String> projectPicker;
     
@@ -81,7 +89,9 @@ public class DefectLogConsolePageController {
 	 ArrayList<String> EffortCategories = new ArrayList<>();
 	 ArrayList<String> Plan2 = new ArrayList<>();
 	 ArrayList<String> lifeCycles = new ArrayList<>();
+	 ArrayList<String> lifeCycles2 = new ArrayList<>();
 	 ArrayList<String> projectNames = new ArrayList<>();
+	 ArrayList<String> Defects = new ArrayList<>();
 	 
 	 private void loadStepOutput(ArrayList<String> arr, String fileName, ChoiceBox<String> box) {
 		    try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
@@ -143,9 +153,11 @@ public class DefectLogConsolePageController {
 	        loadStepOutput(EffortCategories, "EffortCategories.txt", *ADD*);
 	        loadStepOutput(Plan2, "Plans.txt", *ADD*);
 	        */
-			
+			loadLifeCycle(lifeCycles, "LifeCycleSteps.txt", stepWhenInjected);
+			loadLifeCycle(lifeCycles2, "LifeCycleSteps.txt", stepWhenRemoved);
 			//projectPicker.setItems(FXCollections.observableArrayList("Business Project", "Development Project"));
-			defectPicker.setItems(FXCollections.observableArrayList("- no defect selected - ", "Item 2", "Item 3"));
-			fixChoiceBox.setItems(FXCollections.observableArrayList("Item 1", "Item 2", "Item 3"));
+			loadStepOutput(Defects, "DefectCategories.txt", defectPicker);
+			//defectPicker.setItems(FXCollections.observableArrayList("- no defect selected - ", "Item 2", "Item 3"));
+			//fixChoiceBox.setItems(FXCollections.observableArrayList("Item 1", "Item 2", "Item 3"));
 	 }
 }
