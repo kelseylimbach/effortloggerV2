@@ -1,19 +1,13 @@
 package application;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
+//import java.io.BufferedWriter;
 import java.io.FileWriter;
 
 import java.io.IOException;
 
 import java.io.PrintWriter;
-import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-
 import javafx.collections.*;
 
 import javafx.fxml.*;
@@ -22,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
 public class DisplayViewController {
 	@FXML
 	private ChoiceBox<String> projectChoiceBox;
@@ -41,61 +36,9 @@ public class DisplayViewController {
 	 private LocalDateTime endTime;
 	 private Login login;
 	 private String selectedProject, selectedLifeCycle, selectedEffortBox1, selectedEffortBox2;
-	 private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a M/d/yyyy");
-	 
-	 
-	 ArrayList<String> EffortCategories = new ArrayList<>();
-	 ArrayList<String> Plan = new ArrayList<>();
-	 ArrayList<String> lifeCycles = new ArrayList<>();
-	 ArrayList<String> projectNames = new ArrayList<>();
+	 //private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a M/d/yyyy");
 
 
-	 private void loadStepOutput(ArrayList<String> arr, String fileName, ChoiceBox<String> box) {
-		    try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-		        String line;
-		        while ((line = reader.readLine()) != null) {
-		            if (!line.matches("^\\d+,$")) {
-		                String[] parts = line.split(",", 2);
-		                if (parts.length > 1) {
-		                	arr.add(parts[1].trim());
-		                }
-		            }
-		        }
-		        box.setItems(FXCollections.observableArrayList(arr));
-		    } catch (IOException e) {
-		        e.printStackTrace();
-		    }
-		}
-	 
-	 private void loadLifeCycle(ArrayList<String> arr, String fileName, ChoiceBox<String> box) {
-		    try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-		        String line;
-		        while ((line = reader.readLine()) != null) {
-		            String[] parts = line.split(",", -1);
-		            if (parts.length >= 2 && !parts[1].trim().isEmpty()) {
-		            	arr.add(parts[1].trim());
-		            }
-		        }
-		        box.setItems(FXCollections.observableArrayList(arr));
-		    } catch (IOException e) {
-		        e.printStackTrace();
-		    }
-		} 
-	 
-	 private void loadProjects(ArrayList<String> arr, String fileName, ChoiceBox<String> box) {
-		    try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-		        String line;
-		        while ((line = reader.readLine()) != null) {
-		            String[] parts = line.split(",", -1);
-		            if (parts.length >= 2 && !parts[1].trim().isEmpty()) {
-		            	arr.add(parts[1].trim());
-		            }
-		        }
-		        box.setItems(FXCollections.observableArrayList(arr));
-		    } catch (IOException e) {
-		        e.printStackTrace();
-		    }
-		}
 
 	 @FXML
 	    private void onStartActivityButtonClick() {
@@ -115,7 +58,7 @@ public class DisplayViewController {
 	         clockStatusLabel.setStyle("-fx-text-fill: white; -fx-background-color: red; -fx-padding: 10;");
 	         writeActivityLog();
 	    }
-
+	    
 	    private void writeActivityLog() {
 	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm:ss a M/d/yyyy");
 	        String startFormatted = startTime.format(formatter);
@@ -130,37 +73,37 @@ public class DisplayViewController {
 	            (absSeconds % 86400) / 3600,
 	            ((absSeconds % 86400) % 3600) / 60,
 	            (absSeconds % 60));
+
+	        // Format the entry as a single string
+	        String entry = login.getName() + ", " +
+	            startFormatted + ", " +
+	            endFormatted + ", " +
+	            elapsedTime + ", " +
+	            selectedProject + ", " +
+	            selectedLifeCycle + ", " +
+	            selectedEffortBox1 + ", " +
+	            selectedEffortBox2 + ",";
+
 	        try (PrintWriter out = new PrintWriter(new FileWriter("data.txt", true))) {
-	            out.println("***");
-	            out.println("User: " + login.getName());
-	            out.println("Activity Started: " + startFormatted);
-	            out.println("Activity Ended: " + endFormatted);
-	            out.println("Total time elapsed: " + elapsedTime);
-	            out.println("Project: " + selectedProject);
-	            out.println("Life Cycle: " + selectedLifeCycle);
-	            out.println("Effort Category: " + selectedEffortBox1);
-	            out.println("Plan: " + selectedEffortBox2);
-	            out.println("***");
+	            out.println(entry);
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
 	    }
 
+
 	 @FXML
 	    private void onELEditorButtonClick() throws IOException {
 	        // Load the FXML file for the Effort Log Editor Page
-		 URL url = getClass().getResource("/EffortLogEditorPage.fxml");
-		 System.out.println(url); // This should not print 'null'
-		 FXMLLoader loader = new FXMLLoader(url);
-	       // FXMLLoader loader = new FXMLLoader(getClass().getResource("EffortLogEditorPage.fxml"));
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("EffortLogEditorPage.fxml"));
 	        Parent root = loader.load();
-
+	        
 	        // Get the current stage (window)
 	        Stage stage = (Stage) projectChoiceBox.getScene().getWindow();
-
+	        
 	        // Create a new scene with the loaded FXML root
 	        Scene scene = new Scene(root);
-
+	        
 	        // Set the new scene to the current stage
 	        stage.setScene(scene);
 	        stage.show();
@@ -168,15 +111,15 @@ public class DisplayViewController {
 	 @FXML
 	    private void onTutorialButtonClick() throws IOException {
 	        // Load the FXML file 
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Tutorial.fxml"));
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("Tutorial.fxml"));
 	        Parent root = loader.load();
-
+	        
 	        // Get the current stage (window)
 	        Stage stage = (Stage) projectChoiceBox.getScene().getWindow();
-
+	        
 	        // Create a new scene with the loaded FXML root
 	        Scene scene = new Scene(root);
-
+	        
 	        // Set the new scene to the current stage
 	        stage.setScene(scene);
 	        stage.show();
@@ -185,16 +128,15 @@ public class DisplayViewController {
 	    private void onEffortDefectLogButtonClick() throws IOException {
 	        // Load the FXML file 
 		 System.out.println("Loading Effort & defect log console...");
-		 
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EffortDefectLogs.fxml"));
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("EffortDefectLogs.fxml"));
 	        Parent root = loader.load();
-
+	        
 	        // Get the current stage (window)
 	        Stage stage = (Stage) projectChoiceBox.getScene().getWindow();
-
+	        
 	        // Create a new scene with the loaded FXML root
 	        Scene scene = new Scene(root);
-
+	        
 	        // Set the new scene to the current stage
 	        stage.setScene(scene);
 	        stage.show();
@@ -203,15 +145,15 @@ public class DisplayViewController {
 	 @FXML
 	    private void onDefinitionButtonClick() throws IOException {
 	        // Load the FXML file
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/DefinitionsPage.fxml"));
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("DefinitionsPage.fxml"));
 	        Parent root = loader.load();
-
+	        
 	        // Get the current stage (window)
 	        Stage stage = (Stage) projectChoiceBox.getScene().getWindow();
-
+	        
 	        // Create a new scene with the loaded FXML root
 	        Scene scene = new Scene(root);
-
+	        
 	        // Set the new scene to the current stage
 	        stage.setScene(scene);
 	        stage.show();
@@ -220,7 +162,25 @@ public class DisplayViewController {
 	    private void onDefectLogConsoleButtonClick() throws IOException {
 	        // Load the FXML file
 		 System.out.println("Loading defect log console...");
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/DefectLogConsolePage.fxml"));
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("DefectLogConsolePage.fxml"));
+	        Parent root = loader.load();
+	        
+	        // Get the current stage (window)
+	        Stage stage = (Stage) projectChoiceBox.getScene().getWindow();
+	        
+	        // Create a new scene with the loaded FXML root
+	        Scene scene = new Scene(root);
+	        
+	        // Set the new scene to the current stage
+	        stage.setScene(scene);
+	        stage.show();
+	        System.out.println("Finished loading defect log console...");
+	    }
+	 @FXML
+	  private void onPlanningPokerDashboardButtonClick() throws IOException {
+	        // Load the FXML file
+		 System.out.println("Loading planning poker console...");
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("PlanningPokerPage.fxml"));
 	        Parent root = loader.load();
 
 	        // Get the current stage (window)
@@ -232,40 +192,55 @@ public class DisplayViewController {
 	        // Set the new scene to the current stage
 	        stage.setScene(scene);
 	        stage.show();
-	        System.out.println("Finished loading defect log console...");
+	        System.out.println("Finished loading planning poker console...");
 	    }
+	 
+	 @FXML
+	  private void onManagerDashboardButtonClick() throws IOException {
+	        // Load the FXML file
+		 System.out.println("Loading manager console...");
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("ManagerDashboardPage.fxml"));
+	        Parent root = loader.load();
+
+	        // Get the current stage (window)
+	        Stage stage = (Stage) projectChoiceBox.getScene().getWindow();
+
+	        // Create a new scene with the loaded FXML root
+	        Scene scene = new Scene(root);
+
+	        // Set the new scene to the current stage
+	        stage.setScene(scene);
+	        stage.show();
+	        System.out.println("Finished loading manager console...");
+	    }
+	 
+	 
 	@FXML
 	public void initialize() {
 		System.out.println("Initializing...");
-		
-		loadProjects(projectNames, "Projects.txt", projectChoiceBox);
-		//projectChoiceBox.setItems(FXCollections.observableArrayList("Business Project", "Development Project"));
+		projectChoiceBox.setItems(FXCollections.observableArrayList("Business Project", "Development Project"));
+		 	lifeCycleBox.setItems(FXCollections.observableArrayList("Planning", "Information Gathering", "Information Understanding",
+				"Verifying", "Outlining", "Drafting", "Finalizing", "Team Meeting", "Coach Meeting", "Stakeholder Meeting"));
+		 	effortBox1.setItems(FXCollections.observableArrayList("Plans", "Deliverables", "Interruptions", "Defects", "Others"));
+		 	effortBox2.setItems(FXCollections.observableArrayList("Project Plan", "Risk Management Plan", "Conceptual Desing Plan",
+				 "Detailed Design Plan", "Implementation Plan"));
 		 	
-		loadLifeCycle(lifeCycles, "LifeCycleSteps.txt", lifeCycleBox);
-		//lifeCycleBox.setItems(FXCollections.observableArrayList("Planning", "Information Gathering", "Information Understanding",
-		//		"Verifying", "Outlining", "Drafting", "Finalizing", "Team Meeting", "Coach Meeting", "Stakeholder Meeting"));
-		 	
-		 	loadStepOutput(EffortCategories, "EffortCategories.txt", effortBox1);		 	
-		 	loadStepOutput(Plan, "Plans.txt", effortBox2);
-		 	//effortBox2.setItems(FXCollections.observableArrayList("Project Plan", "Risk Management Plan", "Conceptual Desing Plan",
-			//	 "Detailed Design Plan", "Implementation Plan"));
-
 		projectChoiceBox.setOnAction(event->{
 			selectedProject = projectChoiceBox.getValue();
 		});
-
+		
 		lifeCycleBox.setOnAction(event->{
 			selectedLifeCycle = lifeCycleBox.getValue();
 		});
-
+		
 		effortBox1.setOnAction(event->{
 			selectedEffortBox1 = effortBox1.getValue();
 		});
-
+		
 		effortBox2.setOnAction(event->{
 			selectedEffortBox2 = effortBox2.getValue();
 		});
-
+		
 	}
 
 	public void setLogin(Login login) {

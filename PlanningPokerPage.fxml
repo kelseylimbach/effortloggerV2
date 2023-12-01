@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PlanningPokerPageController">
    <children>
       <Button fx:id="backToConsoleButton" layoutX="354.0" layoutY="361.0" mnemonicParsing="false" onAction="#onBackToConsoleButtonClick" prefHeight="25.0" prefWidth="228.0" text="Back to Console" />
@@ -18,13 +19,13 @@
       <Label fx:id="effortEstimateLabel" layoutX="131.0" layoutY="145.0" text="Effort Estimate" />
       <Label fx:id="storyPointEstimate" layoutX="131.0" layoutY="192.0" text="Story Point Estimate" />
       <Button fx:id="saveButton" layoutX="161.0" layoutY="245.0" mnemonicParsing="false" onAction="#onSaveButtonClick" prefHeight="25.0" prefWidth="246.0" text="Save" />
-      <Button layoutX="156.0" layoutY="318.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="246.0" text="Enter Another Item" />
+      <Button fx:id ="enterAnotherItemButton" layoutX="156.0" layoutY="318.0" mnemonicParsing="false" onAction="#onEnterAnotherItemButtonClick" prefHeight="25.0" prefWidth="246.0" text="Enter Another Item" />
       <Label layoutX="131.0" layoutY="58.0" text="For each backlog item that you would like to enter for Planning Poker" />
       <Label layoutX="159.0" layoutY="219.0" text="Once you have entered the estimates, click Save" />
       <Label layoutX="122.0" layoutY="285.0" text="If you would like to enter another item, click the button below" />
       <TextField fx:id="backlogItemTitleField" layoutX="224.0" layoutY="96.0" prefHeight="25.0" prefWidth="183.0" promptText="Title of the Item" />
       <TextField fx:id="effortEstimateField" layoutX="226.0" layoutY="141.0" prefHeight="25.0" prefWidth="183.0" promptText="Enter the estimate here" />
       <TextField fx:id="storyPointEstimateField" layoutX="258.0" layoutY="188.0" promptText="Enter the estimate here" />
-      <Button fx:id="downloadPPButton" layoutX="34.0" layoutY="361.0" mnemonicParsing="false" onAction="#onDownloadPPButtonClick" prefHeight="25.0" prefWidth="304.0" text="Download a log of Planning Poker Estimates" />
+    <!--  <Button fx:id="downloadPPButton" layoutX="34.0" layoutY="361.0" mnemonicParsing="false" onAction="#onDownloadPPButtonClick" prefHeight="25.0" prefWidth="304.0" text="Download a log of Planning Poker Estimates" /> -->
    </children>
 </AnchorPane>
